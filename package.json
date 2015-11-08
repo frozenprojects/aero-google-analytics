@@ -1,0 +1,16 @@
+{
+	"name": "aero-google-analytics",
+	"version": "0.1.0",
+	"description": "Google Analytics for Aero.",
+	"repository": "aerojs/aero-google-analytics",
+	"keywords": [
+		"aero",
+		"google",
+		"analytics"
+	],
+	"author": {
+		"name": "Eduard Urbach",
+		"email": "e.urbach@gmail.com",
+		"url": "http://blitzprog.org"
+	}
+}
