@@ -1,25 +1,17 @@
 'use strict';
 
-let aero = require('aero');
 let Promise = require('bluebird');
-let loadScript = require('aero/lib/functions/loadScript');
+let fs = require('fs');
 
-let analytics = {};
+Promise.promisifyAll(fs);
 
-analytics.init = Promise.coroutine(function*(config) {
-	if(config.UA) {
-		let uaCode = `var googleAnalyticsUA = '${config.UA}';`;
-		let baseScript = yield loadScript(require.resolve('./google-analytics.js'));
-		let fullScript = uaCode + baseScript;
+exports.init = Promise.coroutine(function*(aero, config) {
+	if(!config || !config.UA)
+		return Promise.reject('You need to specify the "UA" field for the Google Analytics plugin.')
 
-		aero.pluginScripts.push(fullScript);
+	let scriptPath = require.resolve('./google-analytics.js')
 
-		return Promise.resolve();
-	} else {
-		console.error(chalk.red('You need to specify the "UA" field for the Google Analytics plugin.'));
-
-		return Promise.reject();
-	}
+	return fs.readFileAsync(scriptPath, 'utf8')
+		.then(code => code.replace('googleAnalyticsUA', `"${config.UA}"`))
+		.then(code => aero.pluginScripts.push(code))
 });
-
-module.exports = analytics;

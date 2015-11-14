@@ -1,8 +1,11 @@
 {
 	"name": "aero-google-analytics",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Google Analytics for Aero.",
 	"repository": "aerojs/aero-google-analytics",
+	"dependencies": {
+		"bluebird": "3.x"
+	},
 	"keywords": [
 		"aero",
 		"google",
