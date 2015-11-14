@@ -12,6 +12,6 @@ exports.init = Promise.coroutine(function*(aero, config) {
 	let scriptPath = require.resolve('./google-analytics.js')
 
 	return fs.readFileAsync(scriptPath, 'utf8')
-		.then(code => code.replace('googleAnalyticsUA', `"${config.UA}"`))
+		.then(code => code.replace('googleAnalyticsUA', `'${config.UA}'`))
 		.then(code => aero.pluginScripts.push(code))
 });
